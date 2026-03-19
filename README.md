@@ -132,15 +132,7 @@ It is not intended to replace full data science frameworks, but rather to provid
 
 ## 🔄 High-Level Workflow
 
-```mermaid
-flowchart LR
-    A[Command Input] --> B[Parse Arguments]
-    B --> C[Read CSV]
-    C --> D[Validate Data]
-    D --> E[Choose Chart Type]
-    E --> F[Render Visualization]
-    F --> G[Save PNG Output]
-```
+![Workflow](static/workflow.png)
 
 ---
 
