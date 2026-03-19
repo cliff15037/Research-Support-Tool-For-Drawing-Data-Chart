@@ -132,7 +132,7 @@ It is not intended to replace full data science frameworks, but rather to provid
 
 ## 🔄 High-Level Workflow
 
-![Workflow](static/workflow.png)
+![Workflow](static/mermaid-diagram.png)
 
 ---
 
