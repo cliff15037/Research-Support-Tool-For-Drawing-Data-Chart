@@ -1,37 +1,32 @@
-import argparse
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--input", required=True)
-    parser.add_argument("--type", required=True)
-    parser.add_argument("--output", required=True)
+    input_path = "input/input_data.xlsx"
+    output_path = "output/latency_chart.png"
 
-    args = parser.parse_args()
+    os.makedirs("output", exist_ok=True)
 
-    # read csv
-    df = pd.read_csv(args.input)
+    # read excel
+    df = pd.read_excel(input_path)
 
     # use first two columns
     x = df.iloc[:, 0]
     y = df.iloc[:, 1]
 
-    # generate chart
-    if args.type == "line":
-        plt.plot(x, y)
-    elif args.type == "bar":
-        plt.bar(x, y)
-    elif args.type == "pie":
-        plt.pie(y, labels=x)
-    else:
-        print("Invalid chart type")
-        return
+    # generate line chart
+    plt.figure()
+    plt.plot(x, y, marker="o")
+    plt.xlabel(df.columns[0])
+    plt.ylabel(df.columns[1])
+    plt.title("Latency vs Node Numbers")
 
     # save output
-    plt.savefig(args.output)
-    print(f"Saved to {args.output}")
+    plt.savefig(output_path)
+    plt.close()
+    print(f"Saved to {output_path}")
 
 
 if __name__ == "__main__":
