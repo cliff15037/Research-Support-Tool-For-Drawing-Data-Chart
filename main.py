@@ -1,11 +1,19 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import argparse
 
 def main():
-    input_path = "input/input_data.xlsx"
-    output_path = "output/latency_chart.png"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", required=True)
+    parser.add_argument("--type", required=True)
+    parser.add_argument("--output", required=True)
+
+    args = parser.parse_args()
+
+    input_path = args.input
+    output_path = args.output
+    chart_type = args.type
 
     os.makedirs("output", exist_ok=True)
 
