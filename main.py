@@ -26,10 +26,21 @@ def main():
 
     # generate line chart
     plt.figure()
-    plt.plot(x, y, marker="o")
-    plt.xlabel(df.columns[0])
-    plt.ylabel(df.columns[1])
-    plt.title("Latency vs Node Numbers")
+    if chart_type == "line":
+        plt.plot(x, y, marker="o")
+        plt.xlabel(df.columns[0])
+        plt.ylabel(df.columns[1])
+        plt.title("Line Chart")
+
+    elif chart_type == "pie":
+        plt.pie(y, labels=x, autopct="%1.1f%%")
+        plt.title("Pie Chart")
+
+    else:
+        print("Invalid chart type. Use 'line' or 'pie'")
+        return
+
+    plt.tight_layout()
 
     # save output
     plt.savefig(output_path)
