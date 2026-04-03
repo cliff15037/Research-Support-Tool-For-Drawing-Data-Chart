@@ -32,6 +32,12 @@ def main():
         plt.ylabel(df.columns[1])
         plt.title("Line Chart")
 
+    elif chart_type == "bar":
+        plt.bar(x, y)
+        plt.xlabel(df.columns[0])
+        plt.ylabel(df.columns[1])
+        plt.title("Bar Chart")
+
     elif chart_type == "pie":
         plt.pie(y, labels=x, autopct="%1.1f%%")
         plt.title("Pie Chart")
