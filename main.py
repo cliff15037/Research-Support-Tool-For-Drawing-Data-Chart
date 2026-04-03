@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
@@ -38,14 +39,20 @@ def main():
         plt.legend()
 
     elif chart_type == "bar":
-        if y_series.shape[1] != 1:
-            print("Bar chart currently supports only one y-column.")
+        if y_series.shape[1] == 0:
+            print("Bar chart needs at least one y-column after the first column.")
             return
-        y = y_series.iloc[:, 0]
-        plt.bar(x, y)
+        x_positions = np.arange(len(x))
+        total_series = y_series.shape[1]
+        bar_width = 0.8 / total_series
+        for idx, column in enumerate(y_series.columns):
+            offsets = x_positions + idx * bar_width - (total_series - 1) * bar_width / 2
+            plt.bar(offsets, y_series[column], width=bar_width, label=column)
+        plt.xticks(x_positions, x)
         plt.xlabel(df.columns[0])
-        plt.ylabel(y_series.columns[0])
+        plt.ylabel(" / ".join(y_series.columns))
         plt.title("Bar Chart")
+        plt.legend()
 
     elif chart_type == "pie":
         if y_series.shape[1] != 1:
